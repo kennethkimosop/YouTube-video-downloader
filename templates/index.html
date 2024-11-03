@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>YouTube Video Downloader (StreamSave)</h1>
+        <form id="downloadForm">
+            <div class="form-group">
+                <label for="url">YouTube URL:</label>
+                <input type="text" id="url" name="url" required 
+                       placeholder="https://www.youtube.com/watch?v=...">
+            </div>
+            <div class="form-group">
+                <label for="quality">Quality:</label>
+                <select id="quality" name="quality">
+                    <option value="highest">Highest</option>
+                    <option value="lowest">Lowest</option>
+                    <option value="720p">720p</option>
+                    <option value="480p">480p</option>
+                    <option value="360p">360p</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="fileType">File Type:</label>
+                <select id="fileType" name="fileType">
+                    <option value="mp4">MP4 (Video)</option>
+                    <option value="mp3">MP3 (Audio)</option>
+                </select>
+            </div>
+            <button type="submit" id="submitBtn">Download</button>
+        </form>
+        <div id="status"></div>
+    </div>
+    <footer class="footer">
+        <p>© 2024 by Kenneth. All rights reserved.</p>
+    </footer>
+    
+    <script src="{{ url_for('static', path='/js/app.js') }}"></script>
+</body>
+</html>
