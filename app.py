@@ -75,11 +75,12 @@ async def download_video(video_request: VideoRequest, background_tasks: Backgrou
             raise HTTPException(status_code=400, detail="Invalid YouTube URL")
 
         try:
-            # Set yt-dlp options
+            # Set yt-dlp options with cookies file
             ydl_opts = {
                 'format': 'bestaudio' if video_request.file_type == 'mp3' else 'best',
                 'noplaylist': True,
                 'outtmpl': os.path.join(DOWNLOAD_DIR, f"{download_id}.%(ext)s"),
+                'cookiefile': 'cookies.txt'  # Add path to cookies file
             }
 
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -107,6 +108,7 @@ async def download_video(video_request: VideoRequest, background_tasks: Backgrou
     except Exception as e:
         logger.error(f"Unexpected error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
 
 def download_with_ytdlp(ydl_opts, url):
     """Download video using yt-dlp with specified options."""
